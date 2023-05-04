@@ -26,7 +26,7 @@ const auth = useAuth();
               <button @click="auth.logout" class="btn btn-warning">Logout</button>
             </template>
             <template v-else>
-              <button type="button" class="btn btn-outline-light me-2">Login</button>
+              <RouterLink  :to="{ name: 'login' }" class="btn btn-outline-light me-2">Login</RouterLink >
               <RouterLink :to="{ name: 'register' }" class="btn btn-warning">Register</RouterLink>
             </template>
           </div>
