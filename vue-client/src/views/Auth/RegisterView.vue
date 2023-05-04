@@ -24,6 +24,7 @@ onBeforeUnmount(store.resetForm);
                     class="form-control" 
                 />
                 <label for="name">User Name</label>
+                <ValidationError :errors="store.errors" field="name" />
             </div>
             <div class="form-floating">
                 <input 
@@ -37,6 +38,7 @@ onBeforeUnmount(store.resetForm);
                     placeholder="name@example.com" 
                 />
                 <label for="email">Email address</label>
+                <ValidationError :errors="store.errors" field="email" />
             </div>
             <div class="form-floating">
                 <input 
@@ -50,6 +52,7 @@ onBeforeUnmount(store.resetForm);
                     placeholder="Password"
                 />
                 <label for="password">Password</label>
+                <ValidationError :errors="store.errors" field="password" />
             </div>
             <div class="form-floating">
                 <input 
