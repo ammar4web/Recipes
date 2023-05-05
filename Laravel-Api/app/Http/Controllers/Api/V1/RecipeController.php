@@ -7,7 +7,7 @@ use App\Http\Requests\StoreRecipeRequest;
 use App\Http\Resources\RecipeResource;
 use App\Models\Recipe;
 use Illuminate\Http\Response;
-use Illuminate\Http\Request;
+use Image;
 
 class RecipeController extends Controller
 {
@@ -26,6 +26,23 @@ class RecipeController extends Controller
     {
         $recipe = Recipe::create($request->validated());
 
+        //
+        if ($request->has('photo')) {
+            $image = $request->file('photo');
+            $originalName = $image->getClientOriginalName();
+            $extension = $image->getClientOriginalExtension();
+            $filename = pathinfo($originalName, PATHINFO_FILENAME);
+            $filename = $filename . '_' . time() . '.' . $extension;
+            $path = public_path('uploads/recipes/' . $filename);
+
+            Image::make($image)
+                ->fit(800, 600)
+                ->save($path);
+
+            // $recipe->image = $filename;
+            $recipe->photo = $filename;
+            $recipe->save();
+        }
         return RecipeResource::make($recipe);
     }
 

@@ -17,7 +17,7 @@ class RecipeResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'photo' => $this->photo,
+            'image' => asset('uploads/recipes/' . $this->photo),
         ];
     }
 }
