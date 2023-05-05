@@ -45,6 +45,13 @@ const router = createRouter({
       beforeEnter: auth,
       component: () => import("@/views/Recipes/IndexView.vue"),
     },
+
+    {
+      path: "/recipes/create",
+      name: "recipes.create",
+      beforeEnter: auth,
+      component: () => import("@/views/Recipes/CreateView.vue"),
+    },
   ],
 })
 
