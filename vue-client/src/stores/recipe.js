@@ -16,7 +16,7 @@ export const useRecipe = defineStore("recipe", () => {
     function resetForm() {
         form.name = "";
         // form.description = "";
-        form.photo = "";
+        form.photo = null;
 
         errors.value = {};
     }
@@ -34,7 +34,11 @@ export const useRecipe = defineStore("recipe", () => {
         errors.value = {};
 
         window.axios
-            .post("recipes", form)
+            .post("recipes", form, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
             .then(() => {
                 router.push({ name: "recipes.index" });
             })
@@ -46,5 +50,9 @@ export const useRecipe = defineStore("recipe", () => {
             .finally(() => (loading.value = false));
     }
 
-    return { form, errors, loading, resetForm, storeRecipe, recipes, getRecipes };
+    function handleImageChange(event) {
+        form.photo = event.target.files[0];
+    }
+
+    return { form, errors, loading, resetForm, storeRecipe, recipes, getRecipes, handleImageChange };
 });
