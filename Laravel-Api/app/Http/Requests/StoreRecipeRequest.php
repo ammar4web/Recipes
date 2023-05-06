@@ -21,9 +21,19 @@ class StoreRecipeRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'name' => 'required',
-            'photo' => 'required'
         ];
+
+        // Check if it's an update request
+        if ($this->isMethod('PUT') || $this->isMethod('PATCH')) {
+            // Make the photo field optional
+            $rules['photo'] = 'sometimes';
+        } else {
+            // For create requests, require the photo field
+            $rules['photo'] = 'required';
+        }
+
+        return $rules;
     }
 }
