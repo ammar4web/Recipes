@@ -1,17 +1,16 @@
 <script setup>
-import { onBeforeUnmount } from "vue";
+import { watchEffect, onBeforeUnmount } from "vue";
 import { useRecipe } from "@/stores/recipe";
-import { onMounted } from "vue";
-
+import { useRoute } from "vue-router";
+ 
 const store = useRecipe();
-
-onMounted(() => {
-        document.querySelector('#photo').addEventListener('change', store.handleImageChange);
-    });
-
+const route = useRoute();
+ 
 onBeforeUnmount(store.resetForm);
-
-
+ 
+watchEffect(async () => {
+  store.getRecipe({ id: route.params.id });
+});
 </script>
 
 <template>
@@ -19,7 +18,7 @@ onBeforeUnmount(store.resetForm);
         <div class="container">
             <div class="row">
                 <div class="col-md-10 offset-md-1">
-                    <form @submit.prevent="store.storeRecipe" novalidate>
+                    <form @submit.prevent="store.updateRecipe({ id: route.params.id })" novalidate>
                         <h1 class="h3 mb-3 fw-normal">Add recipe</h1>
 
                         <div class="form-floating">
@@ -42,7 +41,6 @@ onBeforeUnmount(store.resetForm);
                                     id="photo"
                                     name="photo"
                                     type="file"
-                                    required
                                     @change="handleImageChange"
                                     class="form-control photo custom-file-input"
                                     aria-describedby="photo-addon"
@@ -54,7 +52,20 @@ onBeforeUnmount(store.resetForm);
                             <ValidationError :errors="store.errors" field="photo" />
                         </div>
 
-                        <button class="w-100 btn btn-lg btn-primary" type="submit">Save The Recipe</button>
+                        <!-- <button class="w-100 btn btn-lg btn-primary" type="submit">Save The Recipe</button> -->
+                        <div class="border-top h-1 my-6"></div>
+
+                            <div class="d-flex gap-2">
+                                <button
+                                    type="submit"
+                                    class="btn btn-primary w-100"
+                                >
+                                    Update Recipe
+                                </button>
+                                <RouterLink :to="{ name: 'recipes.index' }" class="btn btn-secondary">
+                                    Cancel
+                                </RouterLink>
+                            </div>
                     </form>
                 </div>
             </div>

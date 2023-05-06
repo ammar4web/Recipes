@@ -33,13 +33,21 @@ onMounted(store.getRecipes);
                                     <div class="card shadow-sm">
                                         <img :src="recipe.image" alt="Recipe Photo" />
                                         <div class="card-body">
-                                            <p class="card-text">{{ recipe.name }} {{ recipe.image }}</p>
+                                            <p class="card-text">{{ recipe.name }}</p>
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div class="btn-group">
-                                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                                    <RouterLink 
+                                                        :to="{ name: 'recipes.show', params: { id: recipe.id } }"
+                                                        class="btn btn-sm btn-outline-secondary me-1">View</RouterLink>
+                                                    <RouterLink 
+                                                        :to="{ name: 'recipes.edit', params: { id: recipe.id } }"
+                                                        class="btn btn-sm btn-warning">Edit</RouterLink>
                                                 </div>
-                                                <small class="text-muted">9 mins</small>
+                                                <button 
+                                                    type="button" 
+                                                    @click="store.deleteRecipe(recipe)"
+                                                    class="btn btn-sm btn-danger">Delete</button>
+                                                <!-- <small class="text-muted">9 mins</small> -->
                                             </div>
                                         </div>
                                     </div>

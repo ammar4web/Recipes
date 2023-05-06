@@ -52,6 +52,20 @@ const router = createRouter({
       beforeEnter: auth,
       component: () => import("@/views/Recipes/CreateView.vue"),
     },
+
+    {
+      path: "/recipes/:id/edit",
+      name: "recipes.edit",
+      beforeEnter: auth,
+      component: () => import("@/views/Recipes/EditView.vue"),
+    },
+
+    {
+      path: "/recipes/:id",
+      name: "recipes.show",
+      beforeEnter: auth,
+      component: () => import("@/views/Recipes/ShowView.vue"),
+    },
   ],
 })
 
