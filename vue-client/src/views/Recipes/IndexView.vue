@@ -22,32 +22,29 @@ onMounted(store.getRecipes);
 
                     <hr class="my-6">
 
-                    <div>There will be our recipes list.</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="album py-5 bg-light">
-        <div class="container">
-
-            <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 g-3">
-                <div 
-                    class="col"
-                    v-for="recipe in store.recipes"
-                    :key="recipe.id"
-                >
-                    <div class="card shadow-sm">
-                        <img :src="recipe.image" alt="Recipe Photo" />
-                        <div class="card-body">
-                            <p class="card-text">{{ recipe.name }} {{ recipe.image }}</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    
+                    <div class="album py-5">
+                            <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 g-3">
+                                <div 
+                                    class="col"
+                                    v-for="recipe in store.recipes"
+                                    :key="recipe.id"
+                                >
+                                    <div class="card shadow-sm">
+                                        <img :src="recipe.image" alt="Recipe Photo" />
+                                        <div class="card-body">
+                                            <p class="card-text">{{ recipe.name }} {{ recipe.image }}</p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                                </div>
+                                                <small class="text-muted">9 mins</small>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <small class="text-muted">9 mins</small>
                             </div>
-                        </div>
                     </div>
                 </div>
             </div>

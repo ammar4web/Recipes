@@ -36,7 +36,7 @@ class RecipeController extends Controller
             $path = public_path('uploads/recipes/' . $filename);
 
             Image::make($image)
-                ->fit(800, 600)
+                ->fit(600, 500)
                 ->save($path);
 
             // $recipe->image = $filename;

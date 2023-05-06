@@ -1,6 +1,7 @@
 import { reactive, ref } from "vue";
 import { defineStore } from "pinia";
 import { useRouter } from "vue-router";
+import { onMounted } from 'vue';
 
 export const useRecipe = defineStore("recipe", () => {
     const router = useRouter();
@@ -52,7 +53,14 @@ export const useRecipe = defineStore("recipe", () => {
 
     function handleImageChange(event) {
         form.photo = event.target.files[0];
-    }
+        const fileName = event.target.files[0].name;
+        const label = event.target.nextElementSibling;
+        label.innerHTML = fileName;
+      };
+      
+      onMounted(() => {
+        document.querySelector('#photo').addEventListener('change', handleImageChange);
+      });
 
     return { form, errors, loading, resetForm, storeRecipe, recipes, getRecipes, handleImageChange };
 });

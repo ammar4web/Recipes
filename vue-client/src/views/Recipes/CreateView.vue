@@ -3,63 +3,86 @@ import { onBeforeUnmount } from "vue";
 import { useRecipe } from "@/stores/recipe";
 
 const store = useRecipe();
-
 onBeforeUnmount(store.resetForm);
+
+
 </script>
 
 <template>
     <main class="form-signin w-100 m-auto">
-        <form @submit.prevent="store.storeRecipe" novalidate>
-            <h1 class="h3 mb-3 fw-normal">Add recipe</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <form @submit.prevent="store.storeRecipe" novalidate>
+                        <h1 class="h3 mb-3 fw-normal">Add recipe</h1>
 
-            <div class="form-floating">
-                <input 
-                    v-model="store.form.name"
-                    id="name"
-                    name="name"
-                    type="text"
-                    required
-                    class="form-control" 
-                    placeholder="name@example.com" 
-                />
-                <label for="name">Recipe's Name</label>
-                <ValidationError :errors="store.errors" field="name" />
-            </div>
-            <div class="form-floating">
-                <label for="photo" class="form-label">photo</label>
-                <input 
-                    id="photo"
-                    name="photo" 
-                    type="file" 
-                    required
-                    @change="store.handleImageChange" 
-                    class="form-control photo"
-                    />
-                <!-- <input 
-                    v-model="store.form.image"
-                    id="image"
-                    name="image"
-                    type="text"
-                    required
-                    class="form-control image" 
-                    placeholder="image"
-                /> -->
-                <ValidationError :errors="store.errors" field="photo" />
-            </div>
+                        <div class="form-floating">
+                            <input 
+                                v-model="store.form.name"
+                                id="name"
+                                name="name"
+                                type="text"
+                                required
+                                class="form-control" 
+                                placeholder="name@example.com" 
+                            />
+                            <label for="name">Recipe's Name</label>
+                            <ValidationError :errors="store.errors" field="name" />
+                        </div>
+                        <div class="form-floating">
+                            <label for="photo" class="form-label">photo</label>
+                            <div class="input-group">
+                                <input 
+                                    id="photo"
+                                    name="photo"
+                                    type="file"
+                                    required
+                                    @change="handleImageChange"
+                                    class="form-control photo custom-file-input"
+                                    aria-describedby="photo-addon"
+                                />
+                                <label class="input-group-text custom-file-label" for="photo">
+                                    Choose File
+                                </label>
+                            </div>
+                            <ValidationError :errors="store.errors" field="photo" />
+                        </div>
 
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
-        </form>
+                        <button class="w-100 btn btn-lg btn-primary" type="submit">Save The Recipe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </main>
 </template>
 
 <style scoped>
+  .custom-file-input {
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+    height: 100%;
+    width: 100%;
+  }
+
+  .custom-file-label {
+    color: black;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    border-radius: 0 0 5px 5px !important;
+    margin: 20px 0;
+    margin-left: 0.5px !important;
+    margin-right: -0.5px !important;
+}
 html,
 body {
     height: 100%;
 }
 
 body {
-    display: flex;
+    /* display: flex; */
     align-items: center;
     padding-top: 40px;
     padding-bottom: 40px;
@@ -68,7 +91,7 @@ body {
 
 
 .form-signin {
-    max-width: 330px;
+    /* max-width: 330px; */
     padding: 15px;
     height: calc(100vh - 72px) !important;
     display: flex;
