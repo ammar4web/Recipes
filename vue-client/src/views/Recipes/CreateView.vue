@@ -26,16 +26,24 @@ onBeforeUnmount(store.resetForm);
                 <ValidationError :errors="store.errors" field="name" />
             </div>
             <div class="form-floating">
+                <label for="photo" class="form-label">photo</label>
                 <input 
-                    v-model="store.form.photo"
                     id="photo"
-                    name="photo"
+                    name="photo" 
+                    type="file" 
+                    required
+                    @change="store.handleImageChange" 
+                    class="form-control photo"
+                    />
+                <!-- <input 
+                    v-model="store.form.image"
+                    id="image"
+                    name="image"
                     type="text"
                     required
-                    class="form-control photo" 
-                    placeholder="photo"
-                />
-                <label for="photo">photo</label>
+                    class="form-control image" 
+                    placeholder="image"
+                /> -->
                 <ValidationError :errors="store.errors" field="photo" />
             </div>
 
@@ -81,7 +89,7 @@ form {
     border-bottom-left-radius: 0;
 }
 
-.photo {
+.image {
     margin-bottom: 10px !important;
     border-top-left-radius: 0 !important;
     border-top-right-radius: 0 !important;
